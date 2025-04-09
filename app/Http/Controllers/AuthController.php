@@ -28,22 +28,36 @@ class AuthController extends Controller {
           try {
               $credentials = $request->only('email', 'password');
               $remember = $request->has('remember');
-              if (Auth::attempt($credentials,$remember)) {
-                  if (Auth::user()->hasRole('admin')) {
-                      return response()->json([
-                          'message' => __("Login successful"),
-                      ]);
-                  } else {
-                      Auth::logout();
-                      return response()->json([
-                          'message' => __("You are not authorized to access this area."),
-                      ], 403);
-                  }
-              } else {
-                  return response()->json([
-                      'message' => __("Invalid credentials"),
-                  ], 401);
-              }
+              if (Auth::attempt($credentials, $remember)) {
+                if (Auth::user()) {
+                    // Check if the user has a role
+                    if (Auth::user()->role) {
+                        if (Auth::user()->role_id == 1) {
+                            return response()->json([
+                                'message' => __("Login successful"),
+                            ]);
+                        } else {
+                            Auth::logout();
+                            return response()->json([
+                                'message' => __("You are not authorized to access this area."),
+                            ], 403);
+                        }
+                    } else {
+                        return response()->json([
+                            'message' => __("User role is not set properly."),
+                        ], 500);
+                    }
+                } else {
+                    return response()->json([
+                        'message' => __("Failed to log in."),
+                    ], 500);
+                }
+            } else {
+                return response()->json([
+                    'message' => __("Invalid credentials"),
+                ], 401);
+            }
+            
           } catch (\Exception $e) {
             return response()->json([
               'message' => $e->getMessage(),

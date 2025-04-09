@@ -1,19 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ClientController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\DataTabelController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SimController;
-use App\Http\Controllers\StationController;
-use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
-
-
-
 
 
 
@@ -53,25 +48,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Clients
     // Dashboard
-    Route::get('/clients/all', [ClientController::class, 'all'])->name('clients.all');
-    Route::get('/client/{id}', [ClientController::class, 'get'])->name('client.get');
-    Route::post('/client/create', [ClientController::class, 'create'])->name('client.create');
-    Route::delete('/client/{id}', [ClientController::class, 'delete'])->name('client.delete');
-    Route::put('/client/{id}', [ClientController::class, 'update'])->name('client.update');
-
-    // Transactions
-    // Dashboard
-    Route::get('/transaction/{id}', [TransactionController::class, 'get'])->name('transaction.get');
-    Route::post('/transaction/create', [TransactionController::class, 'create'])->name('transaction.create');
-    Route::delete('/transaction/{id}', [TransactionController::class, 'delete'])->name('transaction.delete');
-    Route::put('/transaction/{id}', [TransactionController::class, 'update'])->name('transaction.update');
-
-    // Stations
-    // Dashboard
-    Route::get('/station/{id}', [StationController::class, 'get'])->name('station.get');
-    Route::post('/station/create', [StationController::class, 'create'])->name('station.create');
-    Route::delete('/station/{id}', [StationController::class, 'delete'])->name('station.delete');
-    Route::put('/station/{id}', [StationController::class, 'update'])->name('station.update');
+    Route::get('/user/all', [UserController::class, 'all'])->name('user.all');
+    Route::get('/user/{id}', [UserController::class, 'get'])->name('user.get');
+    Route::post('/user/create', [UserController::class, 'create'])->name('user.create');
+    Route::delete('/user/{id}', [UserController::class, 'delete'])->name('user.delete');
+    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
 
     Route::post('/language', [LanguageController::class, 'create'])->name('language.create');
     Route::get('/language/{word}', [LanguageController::class, 'get'])->name('language.get');

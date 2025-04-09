@@ -29,4 +29,5 @@ class SimRepository implements SimRepositoryInterface {
     public function delete($id) {
         return $this->find($id)->delete();
     }
+
 }

@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 
 class Sim extends Model {
     protected $fillable = [
@@ -14,9 +15,6 @@ class Sim extends Model {
         'status'
     ];
 
-    public function station() {
-        return $this->belongsTo(Station::class, 'station_id');
-    }
 
     public function ussds() {
         return $this->hasMany(Ussd::class, 'sim_id');

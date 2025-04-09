@@ -13,22 +13,10 @@
             "link" : "/users"
         },
         {
-            "title" : "Stations",
-            "icon" : "mdi mdi-antenna",
-            "name" : "stations",
-            "link" : "/stations"
-        },
-        {
             "title" : "Sims",
             "icon" : "mdi mdi-sim-outline",
             "name" : "sims",
             "link" : "/sims"
-        },
-        {
-            "title" : "Transactions",
-            "icon" : "mdi mdi-swap-horizontal",
-            "name" : "transactions",
-            "link" : "/transactions"
         },
         {
             "title" : "Languages",

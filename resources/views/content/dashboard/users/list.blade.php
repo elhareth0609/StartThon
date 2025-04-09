@@ -66,7 +66,7 @@
 <!-- Edit Client Modal -->
 <div class="modal fade" id="editClientModal" tabindex="-1" aria-labelledby="editClientLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form class="validate" id="editClientForm" action="{{route('client.update')}}" method="POST">
+        <form class="validate" id="editClientForm" action="{{ route('user.update', ['id' => 0]) }}" method="POST">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editClientLabel">{{ __('Edit Client') }}</h5>
@@ -111,7 +111,7 @@
 <!-- Create Client Modal -->
 <div class="modal fade" id="createClientModal" tabindex="-1" aria-labelledby="createClientLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form class="validate" id="createClientForm" action="{{route('client.create')}}" method="POST">
+        <form class="validate" id="createClientForm" action="{{route('user.create')}}" method="POST">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createClientLabel">{{ __('Create Client') }}</h5>
@@ -407,12 +407,12 @@
                 },
                 success: function(data) {
                 client = data.client;
-                $('#pid').val(client.id);
-                $('#pcode').val(client.code);
-                $('#puses').val(client.max);
-                $('#pdiscount').val(client.discount);
-                $('#pexpired_date').val(client.expired_date.replace(' ', 'T'));
-                $('#pstatus').val(client.status);
+                $('#pid').val(user.id);
+                $('#pcode').val(user.code);
+                $('#puses').val(user.max);
+                $('#pdiscount').val(user.discount);
+                $('#pexpired_date').val(user.expired_date.replace(' ', 'T'));
+                $('#pstatus').val(user.status);
                 updateOverlay();
 
                 $('#loading').hide();
@@ -448,12 +448,12 @@
                     client = data.client;
                     if (client) {
 
-                        $('#pdid').val(client.id);
-                        $('#pdcode').val(client.code);
-                        $('#pduses').val(client.max);
-                        $('#pddiscount').val(client.discount);
-                        $('#pdexpired_date').val(client.expired_date.replace(' ', 'T'));
-                        $('#pdstatus').val(client.status);
+                        $('#pdid').val(user.id);
+                        $('#pdcode').val(user.code);
+                        $('#pduses').val(user.max);
+                        $('#pddiscount').val(user.discount);
+                        $('#pdexpired_date').val(user.expired_date.replace(' ', 'T'));
+                        $('#pdstatus').val(user.status);
                     }
 
                     // Create an object URL from the blob
@@ -491,13 +491,13 @@
                     'X-CSRF-TOKEN': csrfToken
                 },
                 success: function(data) {
-                client = data.client;
-                $('#id').val(client.id);
-                $('#code').val(client.code);
-                $('#uses').val(client.max);
-                $('#discount').val(client.discount);
-                $('#expired_date').val(client.expired_date.replace(' ', 'T'));
-                $('#status').val(client.status);
+                user = data.user;
+                $('#id').val(user.id);
+                $('#code').val(user.code);
+                $('#uses').val(user.max);
+                $('#discount').val(user.discount);
+                $('#expired_date').val(user.expired_date.replace(' ', 'T'));
+                $('#status').val(user.status);
 
                 $('#loading').hide();
                 $('#editClientModal').modal('show');
@@ -560,37 +560,6 @@
                 $('.context-menu').remove();
                 });
         }
-
-    Dropzone.autoDiscover = false;
-    var myDropzone = new Dropzone("#dropzone", {
-        url: "{{ route('clients.import') }}",
-        autoProcessQueue: false,
-        acceptedFiles: '.xlsx,.xls',
-        maxFilesize: 150, // Max file size in MB
-        maxFiles: 1, // Allow only one file
-        addRemoveLinks: true,
-        parallelUploads: 1, // Only one upload at a time
-        dictDefaultMessage: "{{ __('Drag and drop Excel files here or click to upload') }}",
-        dictMaxFilesExceeded: "{{ __('You can only upload one file.') }}", // Error message when max files exceeded
-        headers: {
-            'X-CSRF-TOKEN': csrfToken
-        }
-    });
-
-    // Optional: remove the previous file when a new one is added
-    myDropzone.on("addedfile", function() {
-        if (this.files.length > 1) {
-            this.removeFile(this.files[0]); // Remove the first file to keep only the latest one
-        }
-    });
-
-    myDropzone.on("success", function(file, response) {
-    table.ajax.reload();
-    });
-
-    myDropzone.on("error", function(file, errorMessage) {
-        console.error('Error uploading file:', errorMessage);
-    });
 
     $(document).ready(function() {
         // $.noConflict();
@@ -946,25 +915,6 @@
                 }
             });
 
-            $('.generate-code').click(function(event) {
-                event.preventDefault(); // Prevent default button behavior
-
-                $.ajax({
-                    url: "{{ route('clients.generate') }}",
-                    type: 'GET',
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-                    success: function(response) {
-                        if (response.code) {
-                            $('#code').val(response.code);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Error generating code:', error);
-                    }
-                });
-            });
 
             // Initialize ClipboardJS
             var clipboard = new ClipboardJS('.copy-code');

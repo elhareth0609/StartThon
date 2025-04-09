@@ -14,9 +14,9 @@ use stdClass;
 class AuthController extends Controller {
     public function authenticate(Request $request) {
         $validator = Validator::make($request->all(), [
-            'uid' => 'required|string',
+            // 'uid' => 'required|string',
             'email' => 'required|email',
-            'fcm_token' => 'sometimes|string',
+            // 'fcm_token' => 'sometimes|string',
         ]);
 
         if ($validator->fails()) {
