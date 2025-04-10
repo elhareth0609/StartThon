@@ -13,6 +13,7 @@
         "laravel/socialite": "^5.16",
         "laravel/tinker": "^2.9",
         "mongodb/laravel-mongodb": "^5.2",
+        "mongodb/mongodb": "^1.21",
         "symfony/var-dumper": "^7.1",
         "yajra/laravel-datatables-oracle": "^11.1"
     },

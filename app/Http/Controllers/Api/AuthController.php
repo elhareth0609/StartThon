@@ -2,66 +2,79 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Kreait\Firebase\Exception\Auth\UserNotFound;
 use Kreait\Firebase\Factory;
 use Laravel\Sanctum\PersonalAccessToken;
-use App\Http\Controllers\Controller;
-use Kreait\Firebase\Exception\Auth\UserNotFound;
 use stdClass;
+use MongoDB\BSON\Int64;
 
 class AuthController extends Controller {
     public function authenticate(Request $request) {
-        $validator = Validator::make($request->all(), [
-            // 'uid' => 'required|string',
-            'email' => 'required|email',
-            // 'fcm_token' => 'sometimes|string',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validation failed',
-                'errors' => $validator->errors()->first()
-            ], 400);
-        }
-
-        $factory = (new Factory)
-            ->withServiceAccount(env('FIREBASE_CREDENTIALS_PATH'))
-            ->create();
-
-        $auth = $factory->getAuth();
-
         try {
-            $firebase = $auth->getUser($request->uid);
-        } catch (UserNotFound $e) {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email',
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Validation failed',
+                    'errors' => $validator->errors()->first()
+                ], 400);
+            }
+    
+            // Check database connection first
+            try {
+                DB::connection()->getPdo();
+            } catch (\Exception $e) {
+                return response()->json([
+                    'message' => 'Database connection error',
+                    'error' => $e->getMessage()
+                ], 500);
+            }
+    
+            $user = User::where('email', $request->email)->where('password',bcrypt($request->password))->first();
+            $email = User::where('email', $request->email)->first();
+
+            if (!$email) {
+                $user = new User();
+                $user->email = $request->email;
+                $user->role_id = new Int64(2);
+                $user->password = $request->password; // Or use $request->password
+                $user->save();
+                
+                // Make sure the save operation works
+                if (!$user->save()) {
+                    return response()->json([
+                        'message' => 'Failed to create user'
+                    ], 500);
+                }
+            }
+            //  elseif ($email && !$user) {
+            //     return response()->json([
+            //         'message' => bcrypt($request->password)
+            //     ],401);
+            // }
+
+
+    
+            // $token = $user->createToken('API Token')->plainTextToken;
+    
             return response()->json([
-                'message' => 'User not found in Firebase'
-            ], 404);
-        }
-
-        if ($firebase->email !== $request->email) {
+                'user' => $user,
+                // 'token' => $token
+            ]);
+    
+        } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Email mismatch'
-            ], 400);
+                'message' => 'Server error',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        $user = User::where('email', $firebase->email)->first();
-
-        if (!$user) {
-            $user = new User;
-            $user->email = $firebase->email;
-            $user->fullname = $firebase->displayName;
-            $user->photo = $firebase->photoURL;
-            $user->save();
-        }
-
-        $token = PersonalAccessToken::updateOrCreateForUser($user, ['name' => 'API Token'])->plainTextToken;
-
-        return response()->json([
-            'user' => $user,
-            'token' => $token
-        ]);
     }
 
     public function update(Request $request) {

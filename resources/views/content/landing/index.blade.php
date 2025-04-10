@@ -89,7 +89,7 @@
     /* Hero Section */
     .hero {
         padding: 120px 20px 60px;
-        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        background: linear-gradient(135deg, #07ad8e, #07ad8e);
         color: white;
         text-align: center;
     }
@@ -270,24 +270,24 @@
 <!-- Navigation -->
 <nav>
     <div class="nav-container">
-        <a href="#" class="logo">AppName</a>
+        <a href="#" class="logo">
+            <img width="75px" src="{{asset('assets/img/my/defaults/ee.png')}}" alt="Logo" />
+        </a>
         <button class="menu-btn" onclick="toggleMenu()">
             <span></span>
             <span></span>
             <span></span>
         </button>
         <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#projects">Projects</a>
-            <a href="#sponsors">Sponsors</a>
-            <a href="#contact">Contact</a>
+            <a class="fw-bold" href="#home">Home</a>
+            <a class="fw-bold" href="#contact">Contact</a>
         </div>
     </div>
 </nav>
 
 <!-- Hero Section -->
 <section class="hero" id="home">
-    <h1>Welcome to AppName</h1>
+    <h1>Welcome to UniMerge</h1>
     <p>Your ultimate solution for everything you need</p>
     <div class="app-store-buttons">
         <a href="#" target="_blank"><img src="{{ asset('assets/img/my/defaults/app.png') }}" alt="Download on App Store"></a>
@@ -296,26 +296,6 @@
 </section>
 
 <!-- Projects Section -->
-<section class="projects" id="projects">
-    <h2 class="section-title">Our Projects</h2>
-    <div class="projects-grid">
-        <div class="project-card">
-            <img src="/api/placeholder/280/160" alt="Project 1">
-            <h3>Project 1</h3>
-            <p>Description of project 1 goes here.</p>
-        </div>
-        <div class="project-card">
-            <img src="/api/placeholder/280/160" alt="Project 2">
-            <h3>Project 2</h3>
-            <p>Description of project 2 goes here.</p>
-        </div>
-        <div class="project-card">
-            <img src="/api/placeholder/280/160" alt="Project 3">
-            <h3>Project 3</h3>
-            <p>Description of project 3 goes here.</p>
-        </div>
-    </div>
-</section>
 
 <style>
     .sponsor-logo {
@@ -330,7 +310,7 @@
     }
 </style>
 
-<section class="bg-white px-3 py-5 overflow-hidden position-relative" id="sponsors">
+{{-- <section class="bg-white px-3 py-5 overflow-hidden position-relative" id="sponsors">
     <h2 class="section-title">{{ __('Our Sponsors') }}</h2>
     <div class="position-relative w-100 overflow-hidden">
         <div class="sponsors-grid d-flex position-relative my-2">
@@ -344,7 +324,7 @@
             <img src="{{ asset('assets/my/marks/8.png') }}" alt="Sponsor 8" class="sponsor-logo">
         </div>
     </div>
-</section>
+</section> --}}
 
 <script>
     $(document).ready(function() {
@@ -463,7 +443,7 @@
 
 
 <section class="app-showcase app-showcase-v1 py-5" id="features">
-    <h2 class="section-title text-center mb-5">App Features V1</h2>
+    <h2 class="section-title text-center mb-5">App Features</h2>
     <div class="container">
         <div id="appScreensSlider-v1" class="app-screens-container">
             <div class="app-screens">
@@ -547,30 +527,6 @@
     .app-showcase.app-showcase-v2 .next-btn { right: 20px; }
 </style>
 
-<section class="app-showcase app-showcase-v2 py-5" id="features">
-    <h2 class="section-title text-center mb-5">App Features V2</h2>
-    <div class="container">
-        <div id="appScreensSlider-v2" class="app-screens-container">
-            <div class="app-screens">
-                <div class="screen screen-prev">
-                    <img src="{{ asset('assets/my/landing/1.jpg') }}" alt="App Screen 1">
-                </div>
-                <div class="screen screen-main">
-                    <img src="{{ asset('assets/my/landing/2.jpg') }}" alt="App Screen 2">
-                </div>
-                <div class="screen screen-next">
-                    <img src="{{ asset('assets/my/landing/3.jpg') }}" alt="App Screen 3">
-                </div>
-            </div>
-            <button class="nav-btn prev-btn" onclick="moveSlider('prev')">
-                <i class="mdi mdi-chevron-left"></i>
-            </button>
-            <button class="nav-btn next-btn" onclick="moveSlider('next')">
-                <i class="mdi mdi-chevron-right"></i>
-            </button>
-        </div>
-    </div>
-</section>
 
 <script>
     $(document).ready(function() {
@@ -582,103 +538,6 @@
 
     });
 </script>
-
-
-
-<!-- Testimonials Section -->
-<section class="testimonials py-5 bg-light" id="testimonials">
-    <div class="container">
-        <h2 class="section-title text-center mb-5">What Our Users Say</h2>
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="testimonial-card p-4 bg-white rounded shadow">
-                    <p class="testimonial-text">"This app has completely transformed the way I manage my tasks. Highly recommended!"</p>
-                    <div class="testimonial-author d-flex align-items-center mt-3">
-                        <img src="{{ asset('assets/my/testimonials/1.jpg') }}" alt="User 1" class="rounded-circle me-3" width="50">
-                        <div>
-                            <h5 class="mb-0">John Doe</h5>
-                            <small>CEO, Company A</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="testimonial-card p-4 bg-white rounded shadow">
-                    <p class="testimonial-text">"The features are amazing and the support team is very responsive. Great job!"</p>
-                    <div class="testimonial-author d-flex align-items-center mt-3">
-                        <img src="{{ asset('assets/my/testimonials/2.jpg') }}" alt="User 2" class="rounded-circle me-3" width="50">
-                        <div>
-                            <h5 class="mb-0">Jane Smith</h5>
-                            <small>CTO, Company B</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="testimonial-card p-4 bg-white rounded shadow">
-                    <p class="testimonial-text">"I love how intuitive and user-friendly the app is. It has made my life so much easier."</p>
-                    <div class="testimonial-author d-flex align-items-center mt-3">
-                        <img src="{{ asset('assets/my/testimonials/3.jpg') }}" alt="User 3" class="rounded-circle me-3" width="50">
-                        <div>
-                            <h5 class="mb-0">Alice Johnson</h5>
-                            <small>Product Manager, Company C</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-<!-- Pricing Plans Section -->
-<section class="pricing py-5 bg-white" id="pricing">
-    <div class="container">
-        <h2 class="section-title text-center mb-5">Pricing Plans</h2>
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="pricing-card p-4 bg-light rounded shadow text-center">
-                    <h3 class="mb-3">Basic</h3>
-                    <p class="price"><span class="currency">$</span>9<span class="period">/mo</span></p>
-                    <ul class="list-unstyled mb-4">
-                        <li>10 Projects</li>
-                        <li>5 GB Storage</li>
-                        <li>Basic Support</li>
-                    </ul>
-                    <button class="btn btn-outline-primary">Get Started</button>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="pricing-card p-4 bg-primary text-white rounded shadow text-center">
-                    <h3 class="mb-3">Pro</h3>
-                    <p class="price"><span class="currency">$</span>29<span class="period">/mo</span></p>
-                    <ul class="list-unstyled mb-4">
-                        <li>Unlimited Projects</li>
-                        <li>50 GB Storage</li>
-                        <li>Priority Support</li>
-                    </ul>
-                    <button class="btn btn-light">Get Started</button>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="pricing-card p-4 bg-light rounded shadow text-center">
-                    <h3 class="mb-3">Enterprise</h3>
-                    <p class="price"><span class="currency">$</span>99<span class="period">/mo</span></p>
-                    <ul class="list-unstyled mb-4">
-                        <li>Unlimited Projects</li>
-                        <li>Unlimited Storage</li>
-                        <li>24/7 Support</li>
-                    </ul>
-                    <button class="btn btn-outline-primary">Contact Us</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
 
 
 <!-- Team Section -->
@@ -815,145 +674,6 @@
 
 
 
-<!-- Blog Section -->
-<section class="blog py-5 bg-white" id="blog">
-    <div class="container">
-        <h2 class="section-title text-center mb-5">Latest from Our Blog</h2>
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="blog-card p-4 bg-light rounded shadow">
-                    <img src="{{ asset('assets/my/blog/1.jpg') }}" alt="Blog Post 1" class="img-fluid mb-3 rounded">
-                    <h4 class="mb-2">10 Tips for Productivity</h4>
-                    <p class="text-muted">Discover how to boost your productivity with these simple tips.</p>
-                    <a href="#" class="btn btn-outline-primary">Read More</a>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="blog-card p-4 bg-light rounded shadow">
-                    <img src="{{ asset('assets/my/blog/2.jpg') }}" alt="Blog Post 2" class="img-fluid mb-3 rounded">
-                    <h4 class="mb-2">The Future of Task Management</h4>
-                    <p class="text-muted">Explore the latest trends in task management and how they can benefit you.</p>
-                    <a href="#" class="btn btn-outline-primary">Read More</a>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="blog-card p-4 bg-light rounded shadow">
-                    <img src="{{ asset('assets/my/blog/3.jpg') }}" alt="Blog Post 3" class="img-fluid mb-3 rounded">
-                    <h4 class="mb-2">How to Stay Organized</h4>
-                    <p class="text-muted">Learn the best practices for staying organized in a busy world.</p>
-                    <a href="#" class="btn btn-outline-primary">Read More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-
-
-<!-- Statistics Section -->
-<section class="statistics py-5 bg-primary text-white" id="statistics">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-md-3 mb-4">
-                <h2 class="mb-0">10,000+</h2>
-                <p class="mb-0">Happy Users</p>
-            </div>
-            <div class="col-md-3 mb-4">
-                <h2 class="mb-0">500+</h2>
-                <p class="mb-0">Projects Completed</p>
-            </div>
-            <div class="col-md-3 mb-4">
-                <h2 class="mb-0">99%</h2>
-                <p class="mb-0">Customer Satisfaction</p>
-            </div>
-            <div class="col-md-3 mb-4">
-                <h2 class="mb-0">24/7</h2>
-                <p class="mb-0">Support Available</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-
-
-<!-- Partners Section -->
-<section class="partners py-5 bg-light" id="partners">
-    <div class="container">
-        <h2 class="section-title text-center mb-5">Our Partners</h2>
-        <div class="row align-items-center justify-content-center">
-            <div class="col-md-2 col-4 mb-4">
-                <img src="{{ asset('assets/my/partners/1.png') }}" alt="Partner 1" class="img-fluid">
-            </div>
-            <div class="col-md-2 col-4 mb-4">
-                <img src="{{ asset('assets/my/partners/2.png') }}" alt="Partner 2" class="img-fluid">
-            </div>
-            <div class="col-md-2 col-4 mb-4">
-                <img src="{{ asset('assets/my/partners/3.png') }}" alt="Partner 3" class="img-fluid">
-            </div>
-            <div class="col-md-2 col-4 mb-4">
-                <img src="{{ asset('assets/my/partners/4.png') }}" alt="Partner 4" class="img-fluid">
-            </div>
-            <div class="col-md-2 col-4 mb-4">
-                <img src="{{ asset('assets/my/partners/5.png') }}" alt="Partner 5" class="img-fluid">
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-
-
-
-<!-- Timeline Section -->
-<section class="timeline py-5 bg-white" id="timeline">
-    <div class="container">
-        <h2 class="section-title text-center mb-5">Our Journey</h2>
-        <div class="timeline-container">
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h4>2018</h4>
-                    <p>Founded the company with a vision to revolutionize task management.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h4>2019</h4>
-                    <p>Launched our first product and gained 1,000 users within the first month.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h4>2020</h4>
-                    <p>Expanded our team and introduced new features based on user feedback.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h4>2021</h4>
-                    <p>Reached 10,000 users and received several industry awards.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h4>2022</h4>
-                    <p>Launched our mobile app and expanded to international markets.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-
-
-
-
 <!-- Video Section -->
 <section class="video py-5 bg-light" id="video">
     <div class="container">
@@ -963,49 +683,6 @@
         </div>
     </div>
 </section>
-
-
-
-
-<!-- Social Proof Section -->
-<section class="social-proof py-5 bg-white" id="social-proof">
-    <div class="container">
-        <h2 class="section-title text-center mb-5">As Seen On</h2>
-        <div class="row align-items-center justify-content-center">
-            <div class="col-md-2 col-4 mb-4">
-                <img src="{{ asset('assets/my/social-proof/1.png') }}" alt="Logo 1" class="img-fluid">
-            </div>
-            <div class="col-md-2 col-4 mb-4">
-                <img src="{{ asset('assets/my/social-proof/2.png') }}" alt="Logo 2" class="img-fluid">
-            </div>
-            <div class="col-md-2 col-4 mb-4">
-                <img src="{{ asset('assets/my/social-proof/3.png') }}" alt="Logo 3" class="img-fluid">
-            </div>
-            <div class="col-md-2 col-4 mb-4">
-                <img src="{{ asset('assets/my/social-proof/4.png') }}" alt="Logo 4" class="img-fluid">
-            </div>
-            <div class="col-md-2 col-4 mb-4">
-                <img src="{{ asset('assets/my/social-proof/5.png') }}" alt="Logo 5" class="img-fluid">
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-<!-- Download Section -->
-<section class="download py-5 bg-primary text-white text-center" id="download">
-    <div class="container">
-        <h2 class="mb-4">Download Our App Today</h2>
-        <p class="mb-4">Join thousands of users who are already enjoying the benefits of our app.</p>
-        <div class="app-store-buttons">
-            <a href="#" target="_blank"><img src="{{ asset('assets/img/my/defaults/app.png') }}" alt="Download on App Store"></a>
-            <a href="#" target="_blank"><img src="{{ asset('assets/img/my/defaults/google.png') }}" alt="Get it on Google Play"></a>
-        </div>
-    </div>
-</section>
-
-
 
 
 <!-- Awards Section -->
